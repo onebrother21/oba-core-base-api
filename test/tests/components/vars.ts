@@ -1,9 +1,9 @@
-import {J} from "../utils";
+import {J} from "../../utils";
 import {
   OBACoreBaseApi,
   OBACoreBaseConfig,
   coreBaseConfig
-} from "../../src";
+} from "../../../src";
 
 export const obaCoreBaseVarsInitTests = () => J.utils.desc("AM Vars Init",() => {
   let core:OBACoreBaseApi<null>,c:OBACoreBaseConfig<null>;

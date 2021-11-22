@@ -11,11 +11,14 @@ export declare type OBACoreBaseConfigType<Ev> = {
     errors: OBACoreBaseErrorFactoryConfig;
 };
 export declare type OBACoreBaseConfig<Ev> = Partial<OBACoreBaseConfigType<Ev>>;
-export declare type OBACoreBaseObj<Ev> = {
+export declare type OBACoreBaseType<Ev> = {
     config: OBACoreBaseConfig<Ev>;
     vars: OBACoreBaseVars;
     events: OBACoreBaseEmitter<Ev>;
     e: OBACoreBaseErrorFactory;
     errors: OBACoreBaseErrorFactory;
+    _config: OBACoreBaseConfig<Ev>;
+    _vars: OBACoreBaseVars;
+    _events: OBACoreBaseEmitter<Ev>;
+    _errors: OBACoreBaseErrorFactory;
 };
-export declare type OBACoreBaseType<Ev> = Partial<OBACoreBaseObj<Ev>>;

@@ -1,9 +1,9 @@
-import {J} from "../utils";
+import {J} from "../../utils";
 import {
   OBACoreBaseApi,
   OBACoreBaseConfig,
   coreBaseConfig
-} from "../../src";
+} from "../../../src";
 import OBA,{Enum} from "@onebro/oba-common";
 
 type OBACoreBaseEvents = Enum<boolean,"init"|"shutdown"> & {
