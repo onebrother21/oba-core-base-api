@@ -1,0 +1,62 @@
+"use strict";
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.OBACoreBaseErrorFactory = void 0;
+const mongodb_1 = require("mongodb");
+const oba_common_1 = __importStar(require("@onebro/oba-common"));
+class OBACoreBaseErrorFactory {
+    format(e) { return new oba_common_1.AppError(e); }
+    make(e, k, status, data) {
+        const errCode = k.toLocaleUpperCase();
+        const errStatus = oba_common_1.default.num(status) ? status : e.status;
+        const errData = oba_common_1.default.str(status) ? status : data;
+        const errMsg = errData ? e.message.replace("%s", errData) : e.message;
+        const modified = Object.assign({}, e, {
+            status: errStatus,
+            code: errCode,
+            message: errMsg
+        });
+        return new oba_common_1.AppError(modified);
+    }
+    mapKnownError(e) {
+        switch (true) {
+            case oba_common_1.default.match(/authorized/i, e.name, e.message):
+            case oba_common_1.default.match(/jsonwebtoken/i, e.name, e.message):
+            case oba_common_1.default.match(/jwt/i, e.name, e.message): return this.unauthorized("user");
+            case oba_common_1.default.match(/csrf/i, e.name, e.message): return this.csrf();
+            case oba_common_1.default.match(/cast/i, e.name, e.message): return this.castError();
+            case oba_common_1.default.match(/validation/i, e.name, e.message): return this.validation();
+            case e instanceof mongodb_1.MongoServerError || oba_common_1.default.match(/mongo/i, e.name, e.message): return this.format(e);
+            default: return this.someError();
+        }
+    }
+    map(e) {
+        const errTemplate = this.mapKnownError(e);
+        const errObj = Object.assign(Object.assign({}, errTemplate.json()), { info: e.message, stack: e.stack });
+        errObj.status = e.status || errObj.status;
+        return new oba_common_1.AppError(errObj);
+    }
+    constructor(config) { for (const k in config)
+        this[k] = this.make.bind(null, config[k], k); }
+}
+exports.OBACoreBaseErrorFactory = OBACoreBaseErrorFactory;
+exports.default = OBACoreBaseErrorFactory;
+//# sourceMappingURL=error-factory-main.js.map
