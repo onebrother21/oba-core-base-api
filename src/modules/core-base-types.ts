@@ -1,26 +1,22 @@
-import {OBACoreBaseVars} from "./vars-main";
 import {OBACoreBaseErrorFactory} from "./error-factory-main";
-import {OBACoreBaseEmitter} from "./emitter-main";
-
-import {OBACoreBaseVarsConfig} from "./vars-types";
 import {OBACoreBaseErrorFactoryConfig} from "./error-factory-types";
-import {OBACoreBaseEmitterConfig} from "./emitter-types";
 
-export type OBACoreBaseConfigType<Ev> = {
-  vars:OBACoreBaseVarsConfig;
-  events:OBACoreBaseEmitterConfig<Ev>;
+import { Enum,Strings } from "@onebro/oba-common";
+
+export type OBACoreBaseVars =
+Enum<string,"name"|"env"|"version","id"|"tkn"|"mode"> &
+Enum<boolean,undefined,"verbose"> &
+{envvars:Strings;};
+
+export type OBACoreBaseConfigType = {
+  vars:OBACoreBaseVars;
   e:OBACoreBaseErrorFactoryConfig;
   errors:OBACoreBaseErrorFactoryConfig;
 };
-export type OBACoreBaseConfig<Ev> = Partial<OBACoreBaseConfigType<Ev>>;
+export type OBACoreBaseConfig = Partial<OBACoreBaseConfigType>;
 export type OBACoreBaseType<Ev> = {
-  config:OBACoreBaseConfig<Ev>;
+  config:OBACoreBaseConfig;
   vars:OBACoreBaseVars;
-  events:OBACoreBaseEmitter<Ev>;
-  e:OBACoreBaseErrorFactory;
-  errors:OBACoreBaseErrorFactory;
-  _config:OBACoreBaseConfig<Ev>;
-  _vars:OBACoreBaseVars;
-  _events:OBACoreBaseEmitter<Ev>;
-  _errors:OBACoreBaseErrorFactory;
+  e:OBACoreBaseErrorFactory<Ev>;
+  errors:OBACoreBaseErrorFactory<Ev>;
 };

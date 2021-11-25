@@ -1,8 +1,8 @@
-import OBA, { AppError } from "@onebro/oba-common";
+import OBA, { AppError, Component } from "@onebro/oba-common";
 import { OBACoreBaseErrorFactoryType, OBACoreBaseErrorFactoryConfig } from "./error-factory-types";
-export interface OBACoreBaseErrorFactory extends OBACoreBaseErrorFactoryType {
+export interface OBACoreBaseErrorFactory<Ev> extends Component<OBACoreBaseErrorFactoryConfig, Ev>, OBACoreBaseErrorFactoryType {
 }
-export declare class OBACoreBaseErrorFactory {
+export declare class OBACoreBaseErrorFactory<Ev> extends Component<OBACoreBaseErrorFactoryConfig, Ev> {
     format<T>(e: T): OBA.AppError;
     make(e: AppError, k: string): AppError;
     make(e: AppError, k: string, status: number): AppError;
@@ -10,6 +10,6 @@ export declare class OBACoreBaseErrorFactory {
     make(e: AppError, k: string, status: number, data: string): AppError;
     mapKnownError(e: Error): OBA.AppError;
     map(e: Error | AppError): AppError;
-    constructor(config: OBACoreBaseErrorFactoryConfig);
+    init: () => Promise<void>;
 }
 export default OBACoreBaseErrorFactory;

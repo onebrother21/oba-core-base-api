@@ -1,19 +1,12 @@
-import { OBACoreBaseVars } from "./vars-main";
+import { Component } from "@onebro/oba-common";
 import { OBACoreBaseErrorFactory } from "./error-factory-main";
-import { OBACoreBaseEmitter } from "./emitter-main";
-import { OBACoreBaseType, OBACoreBaseConfig } from "./core-base-types";
-export interface OBACoreBaseApi<Ev> extends OBACoreBaseType<Ev> {
+import { OBACoreBaseType, OBACoreBaseConfig, OBACoreBaseVars } from "./core-base-types";
+export interface OBACoreBaseApi<Ev> extends Component<OBACoreBaseConfig, Ev>, OBACoreBaseType<Ev> {
 }
-export declare class OBACoreBaseApi<Ev> {
-    constructor(config: OBACoreBaseConfig<Ev>);
-    get config(): Partial<import("./core-base-types").OBACoreBaseConfigType<Ev>>;
-    get c(): Partial<import("./core-base-types").OBACoreBaseConfigType<Ev>>;
-    get vars(): OBACoreBaseVars;
+export declare class OBACoreBaseApi<Ev> extends Component<OBACoreBaseConfig, Ev> {
+    get e(): OBACoreBaseErrorFactory<Ev>;
     get v(): OBACoreBaseVars;
-    get errors(): OBACoreBaseErrorFactory;
-    get e(): OBACoreBaseErrorFactory;
-    get events(): OBACoreBaseEmitter<Ev>;
-    get ev(): OBACoreBaseEmitter<Ev>;
-    init: () => void;
+    set v(vars: OBACoreBaseVars);
+    init: () => Promise<void>;
 }
 export default OBACoreBaseApi;

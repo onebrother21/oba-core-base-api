@@ -7,7 +7,6 @@
       "version":"1.1.0",
       "verbose":false
     },
-    "events":{},
     "errors":{
       "cors":{"status":403,"message":"CORS is not allowed"},
       "csrf":{"status":403,"message":"Access denied"},

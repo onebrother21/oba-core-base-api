@@ -6,7 +6,7 @@ import {
 } from "../../../src";
 
 export const obaCoreBaseErrorFactoryInitTests = () => J.utils.desc("AM Errors Init",() => {
-  let core:OBACoreBaseApi<null>,c:OBACoreBaseConfig<null>;
+  let core:OBACoreBaseApi<null>,c:OBACoreBaseConfig;
   it("init",async () => {
     const {errors} = coreBaseConfig("OBA_CORE_BASE");
     c = {errors};
@@ -16,26 +16,26 @@ export const obaCoreBaseErrorFactoryInitTests = () => J.utils.desc("AM Errors In
     J.true(core.e);
     });
   it("404",async () => {
-    J.error(core.e.notfound());
-    console.error(core.e.notfound().message);});
+    J.error(core.e._.notfound());
+    console.error(core.e._.notfound().message);});
   it("Cors",async () => {
-    J.error(core.e.cors());
-    console.error(core.e.cors().message);});
+    J.error(core.e._.cors());
+    console.error(core.e._.cors().message);});
   it("existing data",async () => {
-    J.error(core.e.existing("data"));
-    console.error(core.e.existing("data").message);});
+    J.error(core.e._.existing("data"));
+    console.error(core.e._.existing("data").message);});
   it("data not found",async () => {
-    J.error(core.e.doesNotExist("user"));
-    console.error(core.e.doesNotExist("user").message);});
+    J.error(core.e._.doesNotExist("user"));
+    console.error(core.e._.doesNotExist("user").message);});
   it("invalid data",async () => {
-    J.error(core.e.invalid("api credentials"));
-    console.error(core.e.invalid("api credentials").message);});
+    J.error(core.e._.invalid("api credentials"));
+    console.error(core.e._.invalid("api credentials").message);});
   it("missing data",async () => {
-    J.error(core.e.missing("handle"));
-    console.error(core.e.missing("handle").message);});
+    J.error(core.e._.missing("handle"));
+    console.error(core.e._.missing("handle").message);});
   it("data mismatch",async () => {
-    J.error(core.e.mismatch("pin"));
-    console.error(core.e.mismatch("pin").message);});
+    J.error(core.e._.mismatch("pin"));
+    console.error(core.e._.mismatch("pin").message);});
   it("csrf",async () => {
     J.error(core.e.map(new Error("CSRF")));
     console.error(core.e.map(new Error("CSRF")).message);});
@@ -49,5 +49,9 @@ export const obaCoreBaseErrorFactoryInitTests = () => J.utils.desc("AM Errors In
     const test = core.e.map(new Error("sdihfifhsoif"));
     J.error(test);
     console.error(test.message);
-    console.error(test.info);});
+    console.error(test.info);
+  });
+  it("print component",async () => {
+    core.e.print();
+  });
 });

@@ -6,7 +6,7 @@ export const utils = {
   desc:describe,
   init:async (s:string) => {
     try{
-      const c = coreBaseConfig<null>(s);
+      const c = coreBaseConfig(s);
       const base:OBACoreBaseApi<null> = new OBACoreBaseApi(c);
       base.init();
       return {base};}

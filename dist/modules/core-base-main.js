@@ -1,39 +1,41 @@
 "use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.OBACoreBaseApi = void 0;
-const vars_main_1 = require("./vars-main");
+const oba_common_1 = require("@onebro/oba-common");
 const error_factory_main_1 = require("./error-factory-main");
-const emitter_main_1 = require("./emitter-main");
-class OBACoreBaseApi {
-    constructor(config) {
-        this.init = () => {
-            for (const k in this.c) {
-                const c = this.c[k];
+class OBACoreBaseApi extends oba_common_1.Component {
+    constructor() {
+        super(...arguments);
+        this.init = () => __awaiter(this, void 0, void 0, function* () {
+            var _a;
+            for (const k in this.config) {
+                const c = this.config[k];
                 switch (k) {
                     case "e":
                     case "errors":
-                        this._errors = new error_factory_main_1.OBACoreBaseErrorFactory(c);
-                        break;
-                    case "events":
-                        this._events = new emitter_main_1.OBACoreBaseEmitter(c);
+                        this.errors = new error_factory_main_1.OBACoreBaseErrorFactory(c, this.ctrl);
                         break;
                     case "vars":
-                        this._vars = new vars_main_1.OBACoreBaseVars(c);
+                        this.vars = c;
                         break;
                     default: break;
                 }
             }
-        };
-        this._config = config;
+            yield ((_a = this.e) === null || _a === void 0 ? void 0 : _a.init());
+        });
     }
-    get config() { return this._config; }
-    get c() { return this.config; }
-    get vars() { return this._vars; }
-    get v() { return this.vars; }
-    get errors() { return this._errors; }
     get e() { return this.errors; }
-    get events() { return this._events; }
-    get ev() { return this.events; }
+    get v() { return this.vars; }
+    set v(vars) { this.vars = vars; }
 }
 exports.OBACoreBaseApi = OBACoreBaseApi;
 exports.default = OBACoreBaseApi;
