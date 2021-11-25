@@ -7,13 +7,11 @@ export type OBACoreBaseVars =
 Enum<string,"name"|"env"|"version","id"|"tkn"|"mode"> &
 Enum<boolean,undefined,"verbose"> &
 {envvars:Strings;};
-
-export type OBACoreBaseConfigType = {
+export type OBACoreBaseConfig = Partial<{
   vars:OBACoreBaseVars;
   e:OBACoreBaseErrorFactoryConfig;
   errors:OBACoreBaseErrorFactoryConfig;
-};
-export type OBACoreBaseConfig = Partial<OBACoreBaseConfigType>;
+}>;
 export type OBACoreBaseType<Ev> = {
   config:OBACoreBaseConfig;
   vars:OBACoreBaseVars;

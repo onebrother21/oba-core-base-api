@@ -17,19 +17,9 @@ class OBACoreBaseApi extends oba_common_1.Component {
         super(...arguments);
         this.init = () => __awaiter(this, void 0, void 0, function* () {
             var _a;
-            for (const k in this.config) {
-                const c = this.config[k];
-                switch (k) {
-                    case "e":
-                    case "errors":
-                        this.errors = new error_factory_main_1.OBACoreBaseErrorFactory(c, this.ctrl);
-                        break;
-                    case "vars":
-                        this.vars = c;
-                        break;
-                    default: break;
-                }
-            }
+            const { e, errors, vars } = this.config;
+            e || errors ? this.errors = new error_factory_main_1.OBACoreBaseErrorFactory(e || errors) : null;
+            vars ? this.vars = vars : null;
             yield ((_a = this.e) === null || _a === void 0 ? void 0 : _a.init());
         });
     }
