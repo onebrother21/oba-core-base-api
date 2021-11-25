@@ -8,8 +8,8 @@ export class OBACoreBaseApi<Ev> extends Component<OBACoreBaseConfig,Ev> {
   get v(){return this.vars;}
   set v(vars:OBACoreBaseVars){this.vars = vars;}
   init = async () => {
-    const {e,errors,vars} = this.config;
-    e||errors?this.errors = new OBACoreBaseErrorFactory(e||errors):null;
+    const {ctrl,config:{e,errors,vars}} = this;
+    e||errors?this.errors = new OBACoreBaseErrorFactory(e||errors,ctrl):null;
     vars?this.vars = vars:null;
     await this.e?.init();
   };
