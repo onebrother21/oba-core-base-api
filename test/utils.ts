@@ -8,7 +8,7 @@ export const utils = {
     try{
       const c = coreBaseConfig(s);
       const base:OBACoreBaseApi<null> = new OBACoreBaseApi(c);
-      base.init();
+      await base.init();
       return {base};}
     catch(e){console.error(e);throw e;}
   },
