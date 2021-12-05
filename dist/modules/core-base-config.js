@@ -13,7 +13,7 @@ const setDefaultConfigWithEnvironment = (prefix) => {
     const vars = { name, env, mode, envvars: process.env };
     const initial = config_1.default.get("appconfig");
     const atRuntime = { vars };
-    const coreBaseConfig = oba_common_1.default.merge(initial, atRuntime);
+    const coreBaseConfig = oba_common_1.default.mergeObj(initial, atRuntime);
     return coreBaseConfig;
 };
 exports.coreBaseConfig = setDefaultConfigWithEnvironment;
