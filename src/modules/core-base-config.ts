@@ -4,8 +4,8 @@ import { OBACoreBaseConfig } from "./core-base-types";
 
 const setDefaultConfigWithEnvironment = (prefix:string):OBACoreBaseConfig => {
   const env = process.env.NODE_ENV.toLocaleUpperCase();
-  const name = OB.envvar(prefix,"_NAME");
-  const mode = OB.envvar(prefix,"_MODE");
+  const name = OB.evar(prefix,"_NAME");
+  const mode = OB.evar(prefix,"_MODE");
   const vars = {name,env,mode,envvars:process.env};
   const initial:OBACoreBaseConfig = config.get("appconfig");
   const atRuntime:DeepPartial<OBACoreBaseConfig> = {vars};

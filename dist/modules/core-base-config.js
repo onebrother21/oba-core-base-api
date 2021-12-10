@@ -8,8 +8,8 @@ const config_1 = __importDefault(require("config"));
 const oba_common_1 = __importDefault(require("@onebro/oba-common"));
 const setDefaultConfigWithEnvironment = (prefix) => {
     const env = process.env.NODE_ENV.toLocaleUpperCase();
-    const name = oba_common_1.default.envvar(prefix, "_NAME");
-    const mode = oba_common_1.default.envvar(prefix, "_MODE");
+    const name = oba_common_1.default.evar(prefix, "_NAME");
+    const mode = oba_common_1.default.evar(prefix, "_MODE");
     const vars = { name, env, mode, envvars: process.env };
     const initial = config_1.default.get("appconfig");
     const atRuntime = { vars };

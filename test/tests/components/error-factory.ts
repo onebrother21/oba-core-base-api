@@ -6,13 +6,13 @@ import {
 } from "../../../src";
 import OB from "@onebro/oba-common";
 
-export const obaCoreBaseErrorFactoryInitTests = () => J.utils.desc("AM Errors Init",() => {
+export const obaCoreBaseErrorFactoryInitTests = () => J.desc("AM Errors Init",() => {
   let core:OBACoreBaseApi<null>,c:OBACoreBaseConfig;
   it("init",async () => {
     const {errors} = coreBaseConfig("OBA_CORE_BASE");
     c = {errors};
     core = new OBACoreBaseApi(c);
-    core.init();
+    await core.init();
     J.is(core);
     J.true(core.e);
   });
