@@ -10,7 +10,8 @@ const setDefaultConfigWithEnvironment = (prefix) => {
     const env = process.env.NODE_ENV.toLocaleUpperCase();
     const name = oba_common_1.default.evar(prefix, "_NAME");
     const mode = oba_common_1.default.evar(prefix, "_MODE");
-    const vars = { name, env, mode, envvars: process.env };
+    const version = oba_common_1.default.version();
+    const vars = { name, env, mode, version, envvars: process.env };
     const initial = config_1.default.get("appconfig");
     const atRuntime = { vars };
     const coreBaseConfig = oba_common_1.default.mergeObj(initial, atRuntime);

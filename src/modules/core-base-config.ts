@@ -6,7 +6,8 @@ const setDefaultConfigWithEnvironment = (prefix:string):OBACoreBaseConfig => {
   const env = process.env.NODE_ENV.toLocaleUpperCase();
   const name = OB.evar(prefix,"_NAME");
   const mode = OB.evar(prefix,"_MODE");
-  const vars = {name,env,mode,envvars:process.env};
+  const version = OB.version();
+  const vars = {name,env,mode,version,envvars:process.env};
   const initial:OBACoreBaseConfig = config.get("appconfig");
   const atRuntime:DeepPartial<OBACoreBaseConfig> = {vars};
   const coreBaseConfig = OB.mergeObj(initial,atRuntime) as OBACoreBaseConfig;
