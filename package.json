@@ -1,6 +1,6 @@
 {
   "name": "@onebro/oba-core-base-api",
-  "version": "2.7.17",
+  "version": "2.7.18",
   "description": "Vars, Errors, Eevent Emitter types and utilities for OneBrother Apps",
   "author": "OneBrotherApps",
   "license": "MIT",
